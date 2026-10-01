@@ -1,6 +1,7 @@
 from datetime import datetime
 
 from sqlalchemy import Boolean, Column, DateTime, ForeignKey, Integer, Numeric, String, Text
+from sqlalchemy.orm import relationship
 
 from app.core.database import Base
 
@@ -17,8 +18,10 @@ class Product(Base):
         Integer,
         ForeignKey("categories.id"),
         nullable=False,
-        index=True,
+        index=True
     )
+
+    item_type = Column(String(20), nullable=False, default="CONSUMABLE")
 
     unit_price = Column(Numeric(10, 2), nullable=False)
     cost_price = Column(Numeric(10, 2), nullable=False)
@@ -26,8 +29,7 @@ class Product(Base):
     current_stock = Column(Integer, nullable=False, default=0)
     minimum_stock = Column(Integer, nullable=False, default=0)
 
-    unit = Column(String(30), nullable=False, default="piece")
-
+    unit = Column(String(30), nullable=False)
     is_active = Column(Boolean, nullable=False, default=True)
 
     created_at = Column(DateTime, default=datetime.utcnow, nullable=False)
@@ -35,5 +37,7 @@ class Product(Base):
         DateTime,
         default=datetime.utcnow,
         onupdate=datetime.utcnow,
-        nullable=False,
+        nullable=False
     )
+
+    category = relationship("Category", back_populates="products")

@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from app.routers.categories import router as categories_router
 
 app = FastAPI(
     title="Inventory Management System API",
@@ -6,6 +7,7 @@ app = FastAPI(
     version="1.0.0",
 )
 
+app.include_router(categories_router)
 
 @app.get("/")
 def root():
