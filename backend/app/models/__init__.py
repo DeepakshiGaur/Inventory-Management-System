@@ -2,3 +2,8 @@ from app.models.user import User
 from app.models.category import Category
 from app.models.product import Product
 from app.models.asset import Asset
+from app.models.issuance import Issuance
+from app.models.issuance_item import IssuanceItem
+from app.models.inventory_return import Return
+from app.models.return_item import ReturnItem
+from app.models.inventory_transaction import InventoryTransaction
